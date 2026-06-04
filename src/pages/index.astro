@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import logoSrc from '../assets/logo.png';
 import video1 from '../assets/output.mp4';
 import video2 from '../assets/output.mp4';
+import djiImg from '../assets/dji.jpg';
 import portfolioItems from '../data/portfolio-items';
 ---
 
@@ -11,15 +12,16 @@ import portfolioItems from '../data/portfolio-items';
 
     <!-- MOBILE DRAWER (behind nav z-index) -->
       <div class="mobile-nav-drawer" id="mobile-drawer" aria-hidden="true">
-      <a href="#portfolio" class="drawer-link" data-i18n="portfolio-nav">Πόρτφολιο</a>
-      <a href="#services"  class="drawer-link" data-i18n="services-nav">Υπηρεσίες</a>
-      <a href="#about"     class="drawer-link" data-i18n="about-nav">Σχετικά</a>
-      <a href="#contact"   class="drawer-link drawer-cta" data-i18n="contact-nav">Επικοινωνία</a>
-      <div class="mobile-drawer-lang">
-        <button class="lang-btn lang-btn-active" data-lang="el">EL</button>
-        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="drawer-close" type="button" aria-label="Close menu">×</button>
+        <a href="#portfolio" class="drawer-link" data-i18n="portfolio-nav">Πόρτφολιο</a>
+        <a href="#services"  class="drawer-link" data-i18n="services-nav">Υπηρεσίες</a>
+        <a href="#about"     class="drawer-link" data-i18n="about-nav">Σχετικά</a>
+        <a href="#contact"   class="drawer-link drawer-cta" data-i18n="contact-nav">Επικοινωνία</a>
+        <div class="mobile-drawer-lang">
+          <button class="lang-btn lang-btn-active" data-lang="el">EL</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
       </div>
-    </div>
 
     <!-- NAVIGATION -->
     <nav class="top-nav" id="top-nav" aria-label="Primary navigation">
@@ -65,7 +67,7 @@ import portfolioItems from '../data/portfolio-items';
 
     <!-- HERO -->
     <section class="hero" id="home">
-      <video class="hero-video" autoplay muted loop playsinline poster="/background.svg">
+      <video class="hero-video" autoplay muted loop playsinline poster="/background.svg" oncontextmenu="return false;">
         <source src={video1} type="video/mp4" />
       </video>
       <div class="hero-overlay"></div>
@@ -95,7 +97,7 @@ import portfolioItems from '../data/portfolio-items';
         </p>
       </div>
       <div class="white-hero-media">
-        <video class="white-video" autoplay muted loop playsinline poster="/background.svg">
+        <video class="white-video" autoplay muted loop playsinline poster="/background.svg" oncontextmenu="return false;">
           <source src={video2} type="video/mp4" />
         </video>
       </div>
@@ -198,7 +200,7 @@ import portfolioItems from '../data/portfolio-items';
               <li><span class="list-dot"></span><span data-i18n="about-list3">Από αισθητικά video μέχρι heavy - duty εργασίες</span></li>
             </ul>
           </div>
-          <div class="about-visual"></div>
+          <div class="about-visual" style={`background-image: url('${djiImg?.src ?? djiImg}')`}></div>
         </div>
       </section>
 
@@ -456,6 +458,7 @@ import portfolioItems from '../data/portfolio-items';
 
     // Close on drawer link click
     drawer?.querySelectorAll('a')?.forEach(a => a.addEventListener('click', closeDrawer));
+    drawer?.querySelector('.drawer-close')?.addEventListener('click', closeDrawer);
 
     // Close on Escape key
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
@@ -583,6 +586,30 @@ import portfolioItems from '../data/portfolio-items';
     opacity: 1;
     visibility: visible;
     pointer-events: all;
+  }
+
+  .drawer-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.08);
+    color: rgba(248,250,252,0.94);
+    font-size: 1.75rem;
+    line-height: 1;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .drawer-close:hover {
+    background: rgba(255,255,255,0.16);
+    transform: scale(1.05);
   }
 
   .drawer-link {
@@ -998,6 +1025,7 @@ import portfolioItems from '../data/portfolio-items';
     height: 100%;
     object-fit: cover;
     display: block;
+    pointer-events: none;
   }
 
   /* =====================================================
@@ -1291,7 +1319,6 @@ import portfolioItems from '../data/portfolio-items';
   .about-visual {
     min-height: 460px;
     border-radius: 1.5rem;
-    background-image: url('https://images.unsplash.com/photo-1487505984009-0156a0d0b9ef?auto=format&fit=crop&w=1100&q=80');
     background-size: cover;
     background-position: center;
     box-shadow: 0 30px 80px rgba(0,0,0,0.4);
