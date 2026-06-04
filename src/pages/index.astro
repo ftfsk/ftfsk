@@ -323,6 +323,8 @@ import portfolioItems from '../data/portfolio-items';
     };
 
     let currentLang = localStorage.getItem('lang') || 'el';
+    const keywordEl = document.querySelector('.hero-copy .keyword');
+    let keywordIndex = 0;
 
     const setLanguage = (lang) => {
       currentLang = lang;
@@ -331,9 +333,12 @@ import portfolioItems from '../data/portfolio-items';
       updateLangButtons();
     };
 
+    // FIX 1: Lang button active state — gold highlight on active, dim on inactive, works in both nav and drawer contexts
     const updateLangButtons = () => {
       document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('lang-btn-active', btn.dataset.lang === currentLang);
+        const isActive = btn.dataset.lang === currentLang;
+        btn.classList.toggle('lang-btn-active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       });
     };
 
@@ -400,9 +405,6 @@ import portfolioItems from '../data/portfolio-items';
     updatePageText();
 
     /* ── Keyword cycling ── */
-    const keywordEl = document.querySelector<HTMLElement>('.hero-copy .keyword');
-    let keywordIndex = 0;
-
     const getKeywords = () => translations[currentLang].heroKeywords;
 
     const updateKeyword = () => {
@@ -418,8 +420,8 @@ import portfolioItems from '../data/portfolio-items';
     if (keywordEl) window.setInterval(updateKeyword, 3000);
 
     /* ── Nav visibility: show only while hero is in view ── */
-    const heroEl = document.querySelector<HTMLElement>('.hero');
-    const navEl  = document.querySelector<HTMLElement>('#top-nav');
+    const heroEl = document.querySelector('.hero');
+    const navEl  = document.querySelector('#top-nav');
 
     if (heroEl && navEl && 'IntersectionObserver' in window) {
       new IntersectionObserver((entries) => {
@@ -427,7 +429,7 @@ import portfolioItems from '../data/portfolio-items';
       }, { threshold: 0.05 }).observe(heroEl);
     }
 
-    /* ── Hamburger / mobile drawer ── */
+    /* ── FIX 2: Hamburger / mobile drawer ── */
     const hamburger = document.getElementById('hamburger');
     const drawer    = document.getElementById('mobile-drawer');
 
@@ -453,15 +455,15 @@ import portfolioItems from '../data/portfolio-items';
     });
 
     // Close on drawer link click
-    drawer?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+    drawer?.querySelectorAll('a')?.forEach(a => a.addEventListener('click', closeDrawer));
 
     // Close on Escape key
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
     /* ── Portfolio auto-scroll with seamless loop ── */
     (() => {
-      const scroller = document.querySelector<HTMLElement>('.portfolio-scroller');
-      const track    = scroller?.querySelector<HTMLElement>('.portfolio-track');
+      const scroller = document.querySelector('.portfolio-scroller');
+      const track    = scroller?.querySelector('.portfolio-track');
       if (!scroller || !track) return;
 
       Array.from(track.children).forEach(item => track.appendChild(item.cloneNode(true)));
@@ -472,19 +474,19 @@ import portfolioItems from '../data/portfolio-items';
 
       const updateLoopWidth = () => { loopWidth = track.scrollWidth / 2; };
 
-      scroller.addEventListener('wheel', (e: WheelEvent) => {
+      scroller.addEventListener('wheel', (e) => {
         if (Math.abs(e.deltaY) > 0) { e.preventDefault(); scroller.scrollLeft += e.deltaY * 0.9; }
       }, { passive: false });
 
       // Touch support for dragging the scroller
       let touchStartX = 0;
       let scrollStartLeft = 0;
-      scroller.addEventListener('touchstart', (e: TouchEvent) => {
+      scroller.addEventListener('touchstart', (e) => {
         touchStartX      = e.touches[0].clientX;
         scrollStartLeft  = scroller.scrollLeft;
         paused = true;
       }, { passive: true });
-      scroller.addEventListener('touchmove', (e: TouchEvent) => {
+      scroller.addEventListener('touchmove', (e) => {
         const dx = touchStartX - e.touches[0].clientX;
         scroller.scrollLeft = scrollStartLeft + dx;
       }, { passive: true });
@@ -495,7 +497,7 @@ import portfolioItems from '../data/portfolio-items';
       scroller.addEventListener('mouseenter', () => { paused = true;  });
       scroller.addEventListener('mouseleave', () => { paused = false; });
 
-      const step = (time: number) => {
+      const step = (time) => {
         if (!paused) {
           scroller.scrollLeft += (80 * (time - lastTime)) / 1000;
           if (scroller.scrollLeft >= loopWidth) scroller.scrollLeft -= loopWidth;
@@ -554,26 +556,32 @@ import portfolioItems from '../data/portfolio-items';
   }
 
   /* =====================================================
-     MOBILE DRAWER
+     FIX 2: MOBILE DRAWER
+     — Use visibility + opacity instead of display toggling
+       so the CSS transition works and the drawer is always
+       in the DOM flow but invisible/inert when closed.
   ===================================================== */
   .mobile-nav-drawer {
-    display: none; /* flex on mobile via media query */
     position: fixed;
     inset: 0;
-    z-index: 99;
+    z-index: 101;
     background: rgba(6,9,26,0.97);
     backdrop-filter: blur(14px);
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 2rem;
+    /* Closed state: invisible and non-interactive */
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
   }
 
   .mobile-nav-drawer.open {
     opacity: 1;
+    visibility: visible;
     pointer-events: all;
   }
 
@@ -703,11 +711,14 @@ import portfolioItems from '../data/portfolio-items';
     padding: 0.3rem;
   }
 
+  /* FIX 1: Lang button — gold pill on active, transparent on inactive.
+     Works in both the nav (.lang-switcher) and drawer (.mobile-drawer-lang)
+     since both share the same .lang-btn / .lang-btn-active classes. */
   .lang-btn {
     padding: 0.45rem 0.75rem;
     background: transparent;
     border: none;
-    color: rgba(248,250,252,0.72);
+    color: rgba(248,250,252,0.55);
     font-family: var(--font-label);
     font-size: 0.7rem;
     font-weight: 700;
@@ -720,9 +731,10 @@ import portfolioItems from '../data/portfolio-items';
 
   .lang-btn:hover { color: rgba(248,250,252,0.9); }
 
+  /* Active pill: gold background + dark text — clearly selected */
   .lang-btn-active {
     background: var(--gold);
-    color: var(--ink);
+    color: var(--ink) !important;
   }
 
   .nav-cta {
@@ -776,7 +788,7 @@ import portfolioItems from '../data/portfolio-items';
   .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
   /* =====================================================
-     HERO
+     FIX 3: HERO — perfect centering on all screen sizes
   ===================================================== */
   .hero {
     position: relative;
@@ -820,8 +832,12 @@ import portfolioItems from '../data/portfolio-items';
     position: relative;
     z-index: 2;
     max-width: 880px;
-    margin: 0 auto;
     width: 100%;
+    /* Ensure the copy block itself is centred within the hero flex container */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .tag {
@@ -880,6 +896,8 @@ import portfolioItems from '../data/portfolio-items';
     text-shadow: 0 1px 12px rgba(6,9,26,0.7), 0 4px 24px rgba(6,9,26,0.5);
   }
 
+  /* FIX 3: hero-actions — flex-wrap with centred alignment,
+     full-width container so buttons can't escape sideways */
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
@@ -888,6 +906,8 @@ import portfolioItems from '../data/portfolio-items';
     gap: 1rem;
     margin-top: 2.75rem;
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .button {
@@ -899,6 +919,7 @@ import portfolioItems from '../data/portfolio-items';
     padding: 0.95rem 1.75rem;
     border-radius: 0.5rem;
     background: rgba(255,255,255,0.95);
+    box-sizing: border-box;
     color: var(--ink);
     text-decoration: none;
     font-family: var(--font-body);
@@ -1313,8 +1334,10 @@ import portfolioItems from '../data/portfolio-items';
   .contact-actions {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     gap: 1.5rem;
+    width: min(420px, 100%);
+    margin: 0 auto;
   }
 
   .contact-btn {
@@ -1324,7 +1347,8 @@ import portfolioItems from '../data/portfolio-items';
     font-weight: 700;
     letter-spacing: 0.02em;
     padding: 1rem 2rem;
-    min-width: 240px;
+    width: 100%;
+    min-width: 0;
     font-size: 0.9rem;
     box-sizing: border-box;
   }
@@ -1422,31 +1446,28 @@ import portfolioItems from '../data/portfolio-items';
     .portfolio-track { padding: 0 2rem 0.5rem; }
   }
 
-    /* =====================================================
-      RESPONSIVE — Tablet (<=1024px)
-    ===================================================== */
-    @media (max-width: 1024px) {
-     /* Prevent nav overflow on tablets: show hamburger and simplify nav */
-     .nav-links { display: none; }
-     .lang-switcher { display: none; }
-     .hamburger { display: flex; }
-     .nav-cta { display: none; }
-     .top-nav { padding: 0 1rem; }
-    }
+  /* =====================================================
+     RESPONSIVE — Tablet (<=1024px)
+  ===================================================== */
+  @media (max-width: 1024px) {
+    .nav-links { display: none; }
+    .lang-switcher { display: none; }
+    .hamburger { display: flex; }
+    .nav-cta { display: none; }
+    .top-nav { padding: 0 1rem; }
+  }
 
-    /* =====================================================
-      RESPONSIVE — 768px (large phone)
-    ===================================================== */
-    @media (max-width: 768px) {
+  /* =====================================================
+     RESPONSIVE — 768px (large phone)
+  ===================================================== */
+  @media (max-width: 768px) {
     .top-nav { height: 64px; padding: 0 1.25rem; }
     .logo { height: 38px; }
 
-    /* Show hamburger, hide desktop nav elements */
     .nav-links    { display: none; }
     .lang-switcher { display: none; }
     .nav-cta      { display: none; }
     .hamburger    { display: flex; }
-    .mobile-nav-drawer { display: flex; }
 
     .hero { padding: calc(64px + 1.5rem) 1.25rem 4rem; }
 
@@ -1454,19 +1475,27 @@ import portfolioItems from '../data/portfolio-items';
 
     .hero-lead { font-size: 0.95rem; margin-top: 1.5rem; }
 
+    /* FIX 3: stack buttons vertically on mobile, full-width, centred */
     .hero-actions {
       margin-top: 2rem;
       flex-direction: column;
-      width: 100%;
-      max-width: 360px;
       align-items: center;
       justify-content: center;
+      width: 100%;
+      max-width: 100%;
       margin-left: auto;
       margin-right: auto;
       gap: 0.75rem;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .hero-actions .button { width: 100%; min-width: unset; max-width: 360px; }
+    .hero-actions .button {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
 
     .white-hero-section { padding: 3.5rem 1.5rem; gap: 2rem; }
     .white-hero-copy h2 { font-size: clamp(2rem, 7vw, 3rem); }
@@ -1479,13 +1508,6 @@ import portfolioItems from '../data/portfolio-items';
     .section-heading { padding: 0 1.5rem; margin-bottom: 2rem; }
     .section { padding: 5rem 0; }
 
-    /* Small phones (e.g. Pixel 5, iPhone SE) - ensure hero buttons are centered/full-width */
-    @media (max-width: 420px) {
-      .hero { padding: calc(64px + 1rem) 0.75rem 4rem; }
-      .hero-actions { max-width: calc(100% - 2rem); padding: 0 1rem; box-sizing: border-box; }
-      .hero-actions .button { min-width: 0; width: 100%; max-width: none; }
-    }
-
     .service-grid { grid-template-columns: 1fr; padding: 0 1.5rem 1rem; }
 
     .services-drone { width: 90px; top: 1rem; right: 1.25rem; }
@@ -1496,6 +1518,20 @@ import portfolioItems from '../data/portfolio-items';
     .contact-inner { padding: 0 1.5rem; }
     .contact-inner h2 { font-size: clamp(1.8rem, 7vw, 2.6rem); }
     .contact-btn { width: 100%; min-width: unset; max-width: 360px; }
+  }
+
+  /* =====================================================
+     RESPONSIVE — 420px (small phones)
+  ===================================================== */
+  @media (max-width: 420px) {
+    .hero { padding: calc(64px + 1rem) 1rem 4rem; }
+
+    .hero-actions { padding: 0; }
+
+    .hero-actions .button {
+      max-width: 100%;
+      width: 100%;
+    }
   }
 
   /* =====================================================
