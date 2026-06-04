@@ -1,7 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import logoSrc from '../assets/logo.png';
-import video1 from '../assets/output.mp4';
+import video1 from '../assets/output1.mp4';
+import video2 from '../assets/output.mp4';
 import portfolioItems from '../data/portfolio-items';
 ---
 
@@ -20,24 +21,30 @@ import portfolioItems from '../data/portfolio-items';
             <span class="nav-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
             </span>
-            Πόρτφολιο
+            <span data-i18n="portfolio-nav">Πόρτφολιο</span>
           </a>
           <a href="#services">
             <span class="nav-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
             </span>
-            Υπηρεσίες
+            <span data-i18n="services-nav">Υπηρεσίες</span>
           </a>
           <a href="#about">
             <span class="nav-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><path d="M5.5 21c1.83-3.36 5.1-5 6.5-5s4.67 1.64 6.5 5"/></svg>
             </span>
-            Σχετικά
+            <span data-i18n="about-nav">Σχετικά</span>
           </a>
         </div>
       </div>
 
-      <a href="#contact" class="button nav-cta">Επικοινωνία</a>
+      <div class="nav-right">
+        <div class="lang-switcher" id="lang-switcher">
+          <button class="lang-btn lang-btn-active" data-lang="el">EL</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="#contact" class="button nav-cta">Επικοινωνία</a>
+      </div>
     </nav>
 
     <!-- HERO -->
@@ -51,12 +58,12 @@ import portfolioItems from '../data/portfolio-items';
         <h1>
           <span class="keyword" aria-live="polite">Εξατομικευμένες Υπηρεσίες</span>
         </h1>
-        <p class="hero-lead">
+        <p class="hero-lead" data-i18n="heroLead">
           Μοναδικό cinematic περιεχόμενο για σκάφη, real estate και events — σχεδιασμένο για premium brands.
         </p>
         <div class="hero-actions">
-          <a href="#portfolio" class="button">Προβολή Portfolio</a>
-          <a href="#contact" class="button button-secondary">Επικοινωνία</a>
+          <a href="#portfolio" class="button" data-i18n="view-portfolio">Προβολή Portfolio</a>
+          <a href="#contact" class="button button-secondary" data-i18n="contact-nav">Επικοινωνία</a>
         </div>
       </div>
     </section>
@@ -64,16 +71,16 @@ import portfolioItems from '../data/portfolio-items';
     <!-- WHITE SECTION -->
     <section class="white-hero-section">
       <div class="white-hero-copy">
-        <span class="tag light">Δεν φωτογραφίζουμε απλώς...</span>
-        <h2>Αποτυπώνουμε τις εικόνες που οι πελάτες μας οραματίζονται.</h2>
-        <p>
+        <span class="tag light" data-i18n="white-tag">Δεν φωτογραφίζουμε απλώς...</span>
+        <h2 data-i18n="white-h2">Αποτυπώνουμε τις εικόνες που οι πελάτες μας οραματίζονται.</h2>
+        <p data-i18n="white-p">
           Από βίντεο με drones μέχρι branded περιεχόμενο, δημιουργούμε υλικό που αποθεώνει
           premium προϊόντα και κάνει το όραμά σας αδύνατον να προσπεραστεί.
         </p>
       </div>
       <div class="white-hero-media">
         <video class="white-video" autoplay muted loop playsinline poster="/background.svg">
-          <source src={video1} type="video/mp4" />
+          <source src={video2} type="video/mp4" />
         </video>
       </div>
     </section>
@@ -84,8 +91,8 @@ import portfolioItems from '../data/portfolio-items';
       <!-- PORTFOLIO -->
       <section id="portfolio" class="section portfolio-section">
         <div class="section-heading">
-          <span class="section-label">Πόρτφολιο</span>
-          <h2>Υλικό για σύγχρονες επιχειρήσεις</h2>
+          <span class="section-label" data-i18n="portfolio-label">Πόρτφολιο</span>
+          <h2 data-i18n="portfolio-h2">Υλικό για σύγχρονες επιχειρήσεις</h2>
         </div>
 
         <div class="portfolio-scroller" aria-label="Portfolio services">
@@ -94,7 +101,6 @@ import portfolioItems from '../data/portfolio-items';
               <article class="card service-card">
                 <div class="card-visual" style={`background-image: url('${item.imageUrl}')`} aria-label={item.imageFile}></div>
                 <div class="card-copy">
-                  <span class="card-category">{item.category}</span>
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
                 </div>
@@ -107,8 +113,8 @@ import portfolioItems from '../data/portfolio-items';
       <!-- SERVICES -->
       <section id="services" class="section section-service-grid">
         <div class="section-heading">
-          <span class="section-label">Υπηρεσίες</span>
-          <h2>Τι φέρνουμε στο επόμενό σας project</h2>
+          <span class="section-label" data-i18n="services-label">Υπηρεσίες</span>
+          <h2 data-i18n="services-h2">Τι σας προσφέρουμε</h2>
         </div>
         <div class="services-drone" aria-hidden="true">
           <svg viewBox="0 0 120 80" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -141,29 +147,29 @@ import portfolioItems from '../data/portfolio-items';
             <div class="service-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.9L15 14"/><rect x="1" y="6" width="15" height="12" rx="2"/></svg>
             </div>
-            <h3>Aerial Videography</h3>
-            <p>Σταθερές cinematic λήψεις για promos, commercials και digital campaigns.</p>
+            <h3 data-i18n="aerial-video">Aerial Videography</h3>
+            <p data-i18n="aerial-desc">Σταθερές cinematic λήψεις για promos, commercials και digital campaigns.</p>
           </div>
           <div class="service-box">
             <div class="service-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M3 9l2-4h14l2 4v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9z"/></svg>
             </div>
-            <h3>Drone Photography</h3>
-            <p>Εναέριες φωτογραφίες υψηλής ανάλυσης για print, web και social media.</p>
+            <h3 data-i18n="drone-photo">Drone Photography</h3>
+            <p data-i18n="drone-desc">Εναέριες φωτογραφίες υψηλής ανάλυσης για print, web και social media.</p>
           </div>
           <div class="service-box">
             <div class="service-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 4v16M17 4v16M3 8h4m10 0h4M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"/></svg>
             </div>
-            <h3>Brand Films</h3>
-            <p>Cinematic films με αφηγηματικό χαρακτήρα για premium brand identity.</p>
+            <h3 data-i18n="brand-films">Brand Films</h3>
+            <p data-i18n="brand-desc">Cinematic films με αφηγηματικό χαρακτήρα για premium brand identity.</p>
           </div>
           <div class="service-box">
             <div class="service-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
             </div>
-            <h3>Event Coverage</h3>
-            <p>Ολοκληρωμένη κάλυψη με video και φωτογραφία για κάθε live experience.</p>
+            <h3 data-i18n="event-coverage">Event Coverage</h3>
+            <p data-i18n="event-desc">Ολοκληρωμένη κάλυψη με video και φωτογραφία για κάθε live experience.</p>
           </div>
         </div>
       </section>
@@ -172,9 +178,9 @@ import portfolioItems from '../data/portfolio-items';
       <section id="about" class="section about-section">
         <div class="about-inner">
           <div class="about-text">
-            <span class="section-label">Σχετικά</span>
-            <h2>Drone crews φτιαγμένα για visual storytelling</h2>
-            <p>
+            <span class="section-label" data-i18n="about-label">Σχετικά</span>
+            <h2 data-i18n="about-h2">Drone crew φτιαγμένο για visual storytelling</h2>
+            <p data-i18n="about-p">
               Συνδυάζουμε επαγγελματικές πτητικές πρακτικές με δημιουργική κατεύθυνση για να παραδώσουμε
               υψηλής ποιότητας εναέριο περιεχόμενο. Από το concept μέχρι το τελικό edit,
               η δουλειά μας είναι προσαρμοσμένη για brands που θέλουν να ξεχωρίζουν.
@@ -182,15 +188,15 @@ import portfolioItems from '../data/portfolio-items';
             <ul class="about-list">
               <li>
                 <span class="list-dot"></span>
-                Επαγγελματίες drone pilots με πιστοποίηση
+                <span data-i18n="about-list1">Επαγγελματίες με Πιστοποίηση EASA</span>
               </li>
               <li>
                 <span class="list-dot"></span>
-                Κάμερες 4K και 6K για ανάλυση άλλου επιπέδου
+                <span data-i18n="about-list2">Υψηλής Ποιότητας Εξοπλισμός</span>
               </li>
               <li>
                 <span class="list-dot"></span>
-                Γρήγορη παράδοση και εύκολη αδειοδότηση
+                <span data-i18n="about-list3">Από αισθητικά video μέχρι heavy - duty εργασίες</span>
               </li>
             </ul>
           </div>
@@ -201,9 +207,9 @@ import portfolioItems from '../data/portfolio-items';
       <!-- CONTACT -->
       <section id="contact" class="section contact-section">
         <div class="contact-inner">
-          <span class="section-label light">Επικοινωνία</span>
-          <h2>Σου άρεσε η δουλειά και η φιλοσοφία μας;</h2>
-          <p>
+          <span class="section-label light" data-i18n="contact-label">Επικοινωνία</span>
+          <h2 data-i18n="contact-h2">Σου άρεσε η δουλειά και η φιλοσοφία μας;</h2>
+          <p data-i18n="contact-p">
             Μην διστάσεις να επικοινωνήσεις με email ή να μας βρεις στις παρακάτω πλατφόρμες.
           </p>
           <div class="contact-actions">
@@ -211,14 +217,18 @@ import portfolioItems from '../data/portfolio-items';
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               flythroughfilms@gmail.com
             </a>
+            <a href="https://wa.me/306913366620" target="_blank" rel="noopener noreferrer" class="button contact-btn contact-whatsapp">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-5.031 1.378c-3.055 2.364-3.905 6.75-1.904 10.23 1.93 3.243 6.239 4.43 9.861 2.854 3.531-1.517 5.956-5.396 5.039-9.276-1.127-4.878-6.027-8.066-11.027-7.193-.214.025-.428.025-.642.025z"/></svg>
+              <span data-i18n="whatsapp">WhatsApp</span>
+            </a>
             <div class="contact-social">
               <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener noreferrer" class="social-link">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><path d="M16 11.37a4 4 0 1 1-7.99.63A4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
-                <span>Instagram</span>
+                <span data-i18n="instagram">Instagram</span>
               </a>
               <a href="https://www.youtube.com/yourchannel" target="_blank" rel="noopener noreferrer" class="social-link">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29.44 29.44 0 0 0 1 12a29.44 29.44 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29.44 29.44 0 0 0 23 12a29.44 29.44 0 0 0-.46-5.58z"/><path d="M10 15l5-3-5-3v6z"/></svg>
-                <span>YouTube</span>
+                <span data-i18n="youtube">YouTube</span>
               </a>
             </div>
           </div>
@@ -229,13 +239,160 @@ import portfolioItems from '../data/portfolio-items';
 
     <!-- FOOTER -->
     <footer class="footer">
-      <p>Fly Through Films © 2026 — Cinematic Aerial Media</p>
+      <p data-i18n="footer">Fly Through Films © 2026 — Cinematic Aerial Media</p>
     </footer>
   </main>
 
   <script>
+    /* ── Language configuration ── */
+    const translations = {
+      el: {
+        portfolio: 'Πόρτφολιο',
+        services: 'Υπηρεσίες',
+        about: 'Σχετικά',
+        contact: 'Επικοινωνία',
+        heroTag: 'Fly Through Films',
+        heroKeywords: ['Εξατομικευμένες Υπηρεσίες', 'Τέχνη και Επιχείρηση', 'Αύξηση Πωλήσεων', 'Δημιουργία Αναμνήσεων', 'Κάλυψη Εκδηλώσεων', 'Προώθηση Προϊόντων'],
+        heroLead: 'Μοναδικό cinematic περιεχόμενο για σκάφη, real estate και events — σχεδιασμένο για premium brands.',
+        viewPortfolio: 'Προβολή Portfolio',
+        whiteTag: 'Δεν φωτογραφίζουμε απλώς...',
+        whiteH2: 'Αποτυπώνουμε τις εικόνες που οι πελάτες μας οραματίζονται.',
+        whiteP: 'Από βίντεο με drones μέχρι branded περιεχόμενο, δημιουργούμε υλικό που αποθεώνει premium προϊόντα και κάνει το όραμά σας αδύνατον να προσπεραστεί.',
+        portfolioLabel: 'Πόρτφολιο',
+        portfolioH2: 'Υλικό για σύγχρονες επιχειρήσεις',
+        servicesLabel: 'Υπηρεσίες',
+        servicesH2: 'Τι σας προσφέρουμε',
+        aerialVideo: 'Aerial Videography',
+        aerialVideoDesc: 'Σταθερές cinematic λήψεις για promos, commercials και digital campaigns.',
+        dronePhoto: 'Drone Photography',
+        dronePhotoDesc: 'Εναέριες φωτογραφίες υψηλής ανάλυσης για print, web και social media.',
+        brandFilms: 'Brand Films',
+        brandFilmsDesc: 'Cinematic films με αφηγηματικό χαρακτήρα για premium brand identity.',
+        eventCoverage: 'Event Coverage',
+        eventCoverageDesc: 'Ολοκληρωμένη κάλυψη με video και φωτογραφία για κάθε live experience.',
+        aboutLabel: 'Σχετικά',
+        aboutH2: 'Drone crew φτιαγμένο για visual storytelling',
+        aboutP: 'Συνδυάζουμε επαγγελματικές πτητικές πρακτικές με δημιουργική κατεύθυνση για να παραδώσουμε υψηλής ποιότητας εναέριο περιεχόμενο. Από το concept μέχρι το τελικό edit, η δουλειά μας είναι προσαρμοσμένη για brands που θέλουν να ξεχωρίζουν.',
+        aboutList1: 'Επαγγελματίες με Πιστοποίηση EASA',
+        aboutList2: 'Υψηλής Ποιότητας Εξοπλισμός',
+        aboutList3: 'Από αισθητικά video μέχρι heavy - duty εργασίες',
+        contactLabel: 'Επικοινωνία',
+        contactH2: 'Σου άρεσε η δουλειά και η φιλοσοφία μας;',
+        contactP: 'Μην διστάσεις να επικοινωνήσεις με email ή να μας βρεις στις παρακάτω πλατφόρμες.',
+        whatsapp: 'WhatsApp',
+        instagram: 'Instagram',
+        youtube: 'YouTube',
+        footer: 'Fly Through Films © 2026 — Cinematic Aerial Media'
+      },
+      en: {
+        portfolio: 'Portfolio',
+        services: 'Services',
+        about: 'About',
+        contact: 'Contact',
+        heroTag: 'Fly Through Films',
+        heroKeywords: ['Customized Services', 'Art & Business', 'Increase Sales', 'Create Memories', 'Event Coverage', 'Promote Products'],
+        heroLead: 'Unique cinematic content for yachts, real estate and events — designed for premium brands.',
+        viewPortfolio: 'View Portfolio',
+        whiteTag: 'We don\'t just photograph...',
+        whiteH2: 'We capture the images your clients dream about.',
+        whiteP: 'From drone videos to branded content, we create material that glorifies premium products and makes your vision impossible to ignore.',
+        portfolioLabel: 'Portfolio',
+        portfolioH2: 'Content for modern businesses',
+        servicesLabel: 'Services',
+        servicesH2: 'What we offer',
+        aerialVideo: 'Aerial Videography',
+        aerialVideoDesc: 'Smooth cinematic shots for promos, commercials and digital campaigns.',
+        dronePhoto: 'Drone Photography',
+        dronePhotoDesc: 'High-resolution aerial photography for print, web and social media.',
+        brandFilms: 'Brand Films',
+        brandFilmsDesc: 'Cinematic films with narrative character for premium brand identity.',
+        eventCoverage: 'Event Coverage',
+        eventCoverageDesc: 'Complete coverage with video and photography for every live experience.',
+        aboutLabel: 'About',
+        aboutH2: 'Drone crew built for visual storytelling',
+        aboutP: 'We combine professional flight practices with creative direction to deliver high-quality aerial content. From concept to final edit, our work is tailored for brands that want to stand out.',
+        aboutList1: 'Certified professional drone pilots',
+        aboutList2: 'High-quality equipment',
+        aboutList3: 'From aesthetic videos to heavy-duty work',
+        contactLabel: 'Contact',
+        contactH2: 'Did you like our work and philosophy?',
+        contactP: 'Feel free to contact us by email or find us on the platforms below.',
+        whatsapp: 'WhatsApp',
+        instagram: 'Instagram',
+        youtube: 'YouTube',
+        footer: 'Fly Through Films © 2026 — Cinematic Aerial Media'
+      }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'el';
+
+    const setLanguage = (lang) => {
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      updatePageText();
+      updateLangButtons();
+    };
+
+    const updateLangButtons = () => {
+      const buttons = document.querySelectorAll('.lang-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('lang-btn-active');
+        if (btn.dataset.lang === currentLang) {
+          btn.classList.add('lang-btn-active');
+        }
+      });
+    };
+
+    const updatePageText = () => {
+      const t = translations[currentLang];
+      const updates = {
+        '[data-i18n="portfolio-nav"]': t.portfolio,
+        '[data-i18n="services-nav"]': t.services,
+        '[data-i18n="about-nav"]': t.about,
+        '[data-i18n="contact-nav"]': t.contact,
+        '[data-i18n="view-portfolio"]': t.viewPortfolio,
+        '[data-i18n="white-tag"]': t.whiteTag,
+        '[data-i18n="white-h2"]': t.whiteH2,
+        '[data-i18n="white-p"]': t.whiteP,
+        '[data-i18n="portfolio-label"]': t.portfolioLabel,
+        '[data-i18n="portfolio-h2"]': t.portfolioH2,
+        '[data-i18n="services-label"]': t.servicesLabel,
+        '[data-i18n="services-h2"]': t.servicesH2,
+        '[data-i18n="aerial-video"]': t.aerialVideo,
+        '[data-i18n="aerial-desc"]': t.aerialVideoDesc,
+        '[data-i18n="drone-photo"]': t.dronePhoto,
+        '[data-i18n="drone-desc"]': t.dronePhotoDesc,
+        '[data-i18n="brand-films"]': t.brandFilms,
+        '[data-i18n="brand-desc"]': t.brandFilmsDesc,
+        '[data-i18n="event-coverage"]': t.eventCoverage,
+        '[data-i18n="event-desc"]': t.eventCoverageDesc,
+        '[data-i18n="about-label"]': t.aboutLabel,
+        '[data-i18n="about-h2"]': t.aboutH2,
+        '[data-i18n="about-p"]': t.aboutP,
+        '[data-i18n="about-list1"]': t.aboutList1,
+        '[data-i18n="about-list2"]': t.aboutList2,
+        '[data-i18n="about-list3"]': t.aboutList3,
+        '[data-i18n="contact-label"]': t.contactLabel,
+        '[data-i18n="contact-h2"]': t.contactH2,
+        '[data-i18n="contact-p"]': t.contactP,
+        '[data-i18n="footer"]': t.footer
+      };
+
+      for (const selector in updates) {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => el.textContent = updates[selector]);
+      }
+    };
+
+    const langButtons = document.querySelectorAll('.lang-btn');
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    updateLangButtons();
+
     /* ── Keyword cycling ── */
-    const keywords = ['Εξατομικευμένες Υπηρεσίες', 'Τέχνη και Επιχείρηση', 'Αύξηση Πωλήσεων', 'Δημιουργία Αναμνήσεων', 'Κάλυψη Εκδηλώσεων', 'Προώθηση Προϊόντων'];
+    const keywords = translations[currentLang].heroKeywords;
     const keywordEl = document.querySelector<HTMLElement>('.hero-copy .keyword');
     let keywordIndex = 0;
 
@@ -459,6 +616,45 @@ import portfolioItems from '../data/portfolio-items';
   .nav-cta:hover {
     background: var(--gold-light);
     transform: translateY(-1px);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .lang-switcher {
+    display: flex;
+    gap: 0;
+    background: rgba(255,255,255,0.08);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 0.3rem;
+  }
+
+  .lang-btn {
+    padding: 0.45rem 0.75rem;
+    background: transparent;
+    border: none;
+    color: rgba(248,250,252,0.72);
+    font-family: var(--font-label);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 0.35rem;
+    transition: all 0.2s ease;
+  }
+
+  .lang-btn:hover {
+    color: rgba(248,250,252,0.9);
+  }
+
+  .lang-btn-active {
+    background: var(--gold);
+    color: var(--ink);
   }
 
   /* =====================================================
@@ -1054,6 +1250,15 @@ import portfolioItems from '../data/portfolio-items';
   .contact-btn:hover {
     background: var(--gold-light) !important;
     box-shadow: 0 16px 40px rgba(232,160,32,0.25) !important;
+  }
+
+  .contact-whatsapp {
+    background: #25D366 !important;
+  }
+
+  .contact-whatsapp:hover {
+    background: #20ba5a !important;
+    box-shadow: 0 16px 40px rgba(37, 211, 102, 0.25) !important;
   }
 
   .contact-social {

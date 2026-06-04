@@ -1,46 +1,28 @@
 const portfolioItems = [
   {
-    category: 'Social Media',
-    title: 'Social Campaigns',
-    description: 'Σειρές σύντομων, υψηλής ενέργειας βίντεο για Instagram και Facebook, σχεδιασμένα για engagement και conversions.',
-    imageFile: 'social-media.jpg',
-    imageUrl: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1200&q=80'
-  },
-  {
-    category: 'Real Estate',
-    title: 'Property Films',
-    description: 'Εναέριες και ground λήψεις που παρουσιάζουν ακίνητα με cinematic αισθητική για listings και συνεντεύξεις.',
+    title: 'Real Estate',
+    description: 'Υψηλής ποιότητας βίντεο και φωτογραφίες για αυτούς που θέλουν να ξεχωρίζουν στον χώρο του Real Estate. Δημιουργεία υλικού για AirBNB, Instagram Reels, TikToks και Youtube.',
     imageFile: 'real-estate.jpg',
-    imageUrl: 'https://images.unsplash.com/photo-1505691723518-36a4b6d5a6ff?auto=format&fit=crop&w=1200&q=80'
+    imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80'
   },
   {
-    category: 'Events',
-    title: 'Live Event Coverage',
-    description: 'Οπτικό υλικό από εκδηλώσεις, συνέδρια και συναυλίες — storytelling και highlights για άμεση χρήση.',
-    imageFile: 'events.jpg',
-    imageUrl: 'https://images.unsplash.com/photo-1504805572947-34fad45aed93?auto=format&fit=crop&w=1200&q=80'
+    title: 'Social Media Promotions',
+    description: 'Δυναμικά βίντεο που κόβουν την ανάσα. Ιδανικά για αυτούς που θέλουν να διαφημίσον την επιχείρησή τους.',
+    imageFile: 'social-media.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1460925895917-adf4ee868993?auto=format&fit=crop&w=1200&q=80'
   },
   {
-    category: 'Luxury Travel',
-    title: 'Travel & Lifestyle',
-    description: 'Cinematic ταξιδιωτικά βίντεο που αναδεικνύουν προορισμούς, resorts και exclusive εμπειρίες.',
-    imageFile: 'luxury-travel.jpg',
-    imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80'
+    title: 'Aerial Mapping',
+    description: 'Δημιουργούμε 3D μοντέλα και δυσδιάστατους χάρτες με τη χρήση drone. Ιδανικό για κατασκευαστικές εταιρείες και αγροτικές επιχειρήσεις.',
+    imageFile: 'aerial.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1200&q=80'
   },
   {
-    category: 'Hospitality',
-    title: 'Hospitality Showreels',
-    description: 'Παρουσίαση ξενοδοχείων και fine-dining εμπειριών με έμφαση στο αίσθημα και την ατμόσφαιρα.',
-    imageFile: 'hospitality.jpg',
-    imageUrl: 'https://images.unsplash.com/photo-1496412705862-e0088f16f791?auto=format&fit=crop&w=1200&q=80'
+    title: 'Καταγραφή Προόδου Κατασκευών',
+    description: 'Υπηρεσίες για μηχανικούς πεδίου και κατασκευαστικές εταιρείες, οι οποίες θέλουν να παρακολουθούν την πρόοδο των έργων τους και να ενημερώνουν με σύγχρονους τρόπους τους πελάτες τους.',
+    imageFile: 'construction.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1504917595217-340ff39b3b77?auto=format&fit=crop&w=1200&q=80'
   },
-  {
-    category: 'Property Marketing',
-    title: 'Aerial Property Marketing',
-    description: 'Σύνθετες εναέριες παραγωγές για developers και real estate marketing campaigns.',
-    imageFile: 'property-marketing.jpg',
-    imageUrl: 'https://images.unsplash.com/photo-1505691723518-36a4b6d5a6ff?auto=format&fit=crop&w=1200&q=80'
-  }
 ];
 
 export default portfolioItems;
