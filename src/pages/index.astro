@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import logoSrc from '../assets/logo.png';
+import video1 from '../assets/output.mp4';
 import video2 from '../assets/output.mp4';
 import portfolioItems from '../data/portfolio-items';
 ---
@@ -65,7 +66,7 @@ import portfolioItems from '../data/portfolio-items';
     <!-- HERO -->
     <section class="hero" id="home">
       <video class="hero-video" autoplay muted loop playsinline poster="/background.svg">
-        <source src={video2} type="video/mp4" />
+        <source src={video1} type="video/mp4" />
       </video>
       <div class="hero-overlay"></div>
       <div class="hero-copy">
