@@ -10,11 +10,11 @@ import portfolioItems from '../data/portfolio-items';
   <main class="page-shell">
 
     <!-- MOBILE DRAWER (behind nav z-index) -->
-    <div class="mobile-nav-drawer" id="mobile-drawer" aria-hidden="true">
+      <div class="mobile-nav-drawer" id="mobile-drawer" aria-hidden="true">
       <a href="#portfolio" class="drawer-link" data-i18n="portfolio-nav">Πόρτφολιο</a>
       <a href="#services"  class="drawer-link" data-i18n="services-nav">Υπηρεσίες</a>
       <a href="#about"     class="drawer-link" data-i18n="about-nav">Σχετικά</a>
-      <a href="#contact"   class="drawer-link drawer-cta">Επικοινωνία</a>
+      <a href="#contact"   class="drawer-link drawer-cta" data-i18n="contact-nav">Επικοινωνία</a>
       <div class="mobile-drawer-lang">
         <button class="lang-btn lang-btn-active" data-lang="el">EL</button>
         <button class="lang-btn" data-lang="en">EN</button>
@@ -55,7 +55,7 @@ import portfolioItems from '../data/portfolio-items';
           <button class="lang-btn lang-btn-active" data-lang="el">EL</button>
           <button class="lang-btn" data-lang="en">EN</button>
         </div>
-        <a href="#contact" class="button nav-cta">Επικοινωνία</a>
+        <a href="#contact" class="button nav-cta" data-i18n="contact-nav">Επικοινωνία</a>
         <!-- Hamburger (mobile only) -->
         <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -117,8 +117,8 @@ import portfolioItems from '../data/portfolio-items';
               <article class="card service-card">
                 <div class="card-visual" style={`background-image: url('${item.imageUrl}')`} aria-label={item.imageFile}></div>
                 <div class="card-copy">
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
+                  <h3 class="portfolio-title" data-title-el={item.title} data-title-en={item.title_en ?? item.title}>{item.title}</h3>
+                  <p class="portfolio-desc" data-desc-el={item.description} data-desc-en={item.description_en ?? item.description}>{item.description}</p>
                 </div>
               </article>
             ))}
@@ -215,7 +215,7 @@ import portfolioItems from '../data/portfolio-items';
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               flythroughfilms@gmail.com
             </a>
-            <a href="https://wa.me/306913366620" target="_blank" rel="noopener noreferrer" class="button contact-btn contact-whatsapp">
+            <a href="https://wa.me/306987945665" target="_blank" rel="noopener noreferrer" class="button contact-btn contact-whatsapp">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-5.031 1.378c-3.055 2.364-3.905 6.75-1.904 10.23 1.93 3.243 6.239 4.43 9.861 2.854 3.531-1.517 5.956-5.396 5.039-9.276-1.127-4.878-6.027-8.066-11.027-7.193-.214.025-.428.025-.642.025z"/></svg>
               <span data-i18n="whatsapp">WhatsApp</span>
             </a>
@@ -374,6 +374,22 @@ import portfolioItems from '../data/portfolio-items';
       for (const [sel, val] of Object.entries(map)) {
         document.querySelectorAll(sel).forEach(el => el.textContent = val);
       }
+      // update portfolio item titles/descriptions from data attributes
+      document.querySelectorAll('.portfolio-title').forEach(el => {
+        const elNode = el;
+        const val = currentLang === 'en' ? (elNode.dataset.titleEn || elNode.getAttribute('data-title-en')) : (elNode.dataset.titleEl || elNode.getAttribute('data-title-el'));
+        if (val) elNode.textContent = val;
+      });
+      document.querySelectorAll('.portfolio-desc').forEach(el => {
+        const elNode = el;
+        const val = currentLang === 'en' ? (elNode.dataset.descEn || elNode.getAttribute('data-desc-en')) : (elNode.dataset.descEl || elNode.getAttribute('data-desc-el'));
+        if (val) elNode.textContent = val;
+      });
+      // update initial keyword immediately
+      if (keywordEl) {
+        const kws = translations[currentLang]?.heroKeywords;
+        if (kws && kws.length) keywordEl.textContent = kws[0];
+      }
     };
 
     document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -381,6 +397,7 @@ import portfolioItems from '../data/portfolio-items';
     });
 
     updateLangButtons();
+    updatePageText();
 
     /* ── Keyword cycling ── */
     const keywordEl = document.querySelector<HTMLElement>('.hero-copy .keyword');
@@ -1405,10 +1422,22 @@ import portfolioItems from '../data/portfolio-items';
     .portfolio-track { padding: 0 2rem 0.5rem; }
   }
 
-  /* =====================================================
-     RESPONSIVE — 768px (large phone)
-  ===================================================== */
-  @media (max-width: 768px) {
+    /* =====================================================
+      RESPONSIVE — Tablet (<=1024px)
+    ===================================================== */
+    @media (max-width: 1024px) {
+     /* Prevent nav overflow on tablets: show hamburger and simplify nav */
+     .nav-links { display: none; }
+     .lang-switcher { display: none; }
+     .hamburger { display: flex; }
+     .nav-cta { display: none; }
+     .top-nav { padding: 0 1rem; }
+    }
+
+    /* =====================================================
+      RESPONSIVE — 768px (large phone)
+    ===================================================== */
+    @media (max-width: 768px) {
     .top-nav { height: 64px; padding: 0 1.25rem; }
     .logo { height: 38px; }
 
@@ -1429,10 +1458,15 @@ import portfolioItems from '../data/portfolio-items';
       margin-top: 2rem;
       flex-direction: column;
       width: 100%;
-      max-width: 320px;
+      max-width: 360px;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+      gap: 0.75rem;
     }
 
-    .hero-actions .button { width: 100%; min-width: unset; }
+    .hero-actions .button { width: 100%; min-width: unset; max-width: 360px; }
 
     .white-hero-section { padding: 3.5rem 1.5rem; gap: 2rem; }
     .white-hero-copy h2 { font-size: clamp(2rem, 7vw, 3rem); }
@@ -1444,6 +1478,13 @@ import portfolioItems from '../data/portfolio-items';
 
     .section-heading { padding: 0 1.5rem; margin-bottom: 2rem; }
     .section { padding: 5rem 0; }
+
+    /* Small phones (e.g. Pixel 5, iPhone SE) - ensure hero buttons are centered/full-width */
+    @media (max-width: 420px) {
+      .hero { padding: calc(64px + 1rem) 0.75rem 4rem; }
+      .hero-actions { max-width: calc(100% - 2rem); padding: 0 1rem; box-sizing: border-box; }
+      .hero-actions .button { min-width: 0; width: 100%; max-width: none; }
+    }
 
     .service-grid { grid-template-columns: 1fr; padding: 0 1.5rem 1rem; }
 
