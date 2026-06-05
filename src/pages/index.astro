@@ -57,11 +57,9 @@ import portfolioItems from '../data/portfolio-items';
           <button class="lang-btn lang-btn-active" data-lang="el">EL</button>
           <button class="lang-btn" data-lang="en">EN</button>
         </div>
+        <!-- ① NAV WHATSAPP: square icon-only button with proper WhatsApp logo -->
         <a href="https://wa.me/306987945665" target="_blank" rel="noopener noreferrer" class="nav-whatsapp" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M16.55 7.45a4.74 4.74 0 00-6.7 0 4.82 4.82 0 00-1.38 3.42c0 1.03.23 2.02.67 2.93L7 18.9l5.12-1.35a4.82 4.82 0 002.93.67 4.74 4.74 0 003.42-1.38 4.74 4.74 0 000-6.7z" />
-            <path d="M16.29 11.5a.64.64 0 00-.85-.16l-.8.5a.66.66 0 01-.85-.17l-.64-.96a.66.66 0 01.16-.85l.8-.5a.65.65 0 00.16-.85L13.73 7.1a.66.66 0 00-.85-.16l-1.3.81a.66.66 0 00-.16.85l.32.48a3.48 3.48 0 00-.95 1.66l-.06.29a.66.66 0 00.59.8l.38.03a.66.66 0 00.53-.33l.3-.47a.65.65 0 01.85-.16l1.12.7a.66.66 0 00.85-.16l.33-.48a.66.66 0 00-.16-.85z" />
-          </svg>
+          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
         </a>
         <a href="#contact" class="button nav-cta" data-i18n="contact-nav">Επικοινωνία</a>
         <!-- Hamburger (mobile only) -->
@@ -73,7 +71,26 @@ import portfolioItems from '../data/portfolio-items';
 
     <!-- HERO -->
     <section class="hero" id="home">
-      <video id="hero-video" class="hero-video" autoplay muted loop playsinline preload="auto" poster="/background.svg" oncontextmenu="return false;">
+      <!--
+        ③ VIDEO OPTIMISATION:
+        - disablePictureInPicture   → removes the PiP button/browser option
+        - controlsList              → hides download, full-screen, remote-playback controls
+        - oncontextmenu             → already blocks right-click; kept for browsers that honour it
+        - No <controls> attribute   → prevents the native control bar entirely
+      -->
+      <video
+        id="hero-video"
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        poster="/background.svg"
+        disablePictureInPicture
+        controlsList="nodownload nofullscreen noremoteplayback"
+        oncontextmenu="return false;"
+      >
         <source src={video1} type="video/mp4" />
       </video>
       <div class="hero-overlay"></div>
@@ -103,7 +120,19 @@ import portfolioItems from '../data/portfolio-items';
         </p>
       </div>
       <div class="white-hero-media">
-        <video id="white-video" class="white-video" autoplay muted loop playsinline preload="auto" poster="/background.svg" oncontextmenu="return false;">
+        <video
+          id="white-video"
+          class="white-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          poster="/background.svg"
+          disablePictureInPicture
+          controlsList="nodownload nofullscreen noremoteplayback"
+          oncontextmenu="return false;"
+        >
           <source src={video2} type="video/mp4" />
         </video>
       </div>
@@ -223,8 +252,9 @@ import portfolioItems from '../data/portfolio-items';
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               flythroughfilms@gmail.com
             </a>
+            <!-- ② CONTACT WHATSAPP: proper WhatsApp logo icon -->
             <a href="https://wa.me/306987945665" target="_blank" rel="noopener noreferrer" class="button contact-btn contact-whatsapp">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-5.031 1.378c-3.055 2.364-3.905 6.75-1.904 10.23 1.93 3.243 6.239 4.43 9.861 2.854 3.531-1.517 5.956-5.396 5.039-9.276-1.127-4.878-6.027-8.066-11.027-7.193-.214.025-.428.025-.642.025z"/></svg>
+              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
               <span data-i18n="whatsapp">WhatsApp</span>
             </a>
             <div class="contact-social">
@@ -341,7 +371,6 @@ import portfolioItems from '../data/portfolio-items';
       updateLangButtons();
     };
 
-    // FIX 1: Lang button active state — gold highlight on active, dim on inactive, works in both nav and drawer contexts
     const updateLangButtons = () => {
       document.querySelectorAll('.lang-btn').forEach(btn => {
         const isActive = btn.dataset.lang === currentLang;
@@ -387,7 +416,6 @@ import portfolioItems from '../data/portfolio-items';
       for (const [sel, val] of Object.entries(map)) {
         document.querySelectorAll(sel).forEach(el => el.textContent = val);
       }
-      // update portfolio item titles/descriptions from data attributes
       document.querySelectorAll('.portfolio-title').forEach(el => {
         const elNode = el;
         const val = currentLang === 'en' ? (elNode.dataset.titleEn || elNode.getAttribute('data-title-en')) : (elNode.dataset.titleEl || elNode.getAttribute('data-title-el'));
@@ -398,7 +426,6 @@ import portfolioItems from '../data/portfolio-items';
         const val = currentLang === 'en' ? (elNode.dataset.descEn || elNode.getAttribute('data-desc-en')) : (elNode.dataset.descEl || elNode.getAttribute('data-desc-el'));
         if (val) elNode.textContent = val;
       });
-      // update initial keyword immediately
       if (keywordEl) {
         const kws = translations[currentLang]?.heroKeywords;
         if (kws && kws.length) keywordEl.textContent = kws[0];
@@ -437,7 +464,7 @@ import portfolioItems from '../data/portfolio-items';
       }, { threshold: 0.05 }).observe(heroEl);
     }
 
-    /* ── FIX 2: Hamburger / mobile drawer ── */
+    /* ── Hamburger / mobile drawer ── */
     const hamburger = document.getElementById('hamburger');
     const drawer    = document.getElementById('mobile-drawer');
 
@@ -462,41 +489,50 @@ import portfolioItems from '../data/portfolio-items';
       }
     });
 
-    // Close on drawer link click
     drawer?.querySelectorAll('a')?.forEach(a => a.addEventListener('click', closeDrawer));
     drawer?.querySelector('.drawer-close')?.addEventListener('click', closeDrawer);
-
-    // Close on Escape key
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
-    /* ── Video resilience fixes ── */
+    /* ── Video resilience + popup prevention ── */
     const videoElements = Array.from(document.querySelectorAll('video'));
-    const restoreVideoPlayback = (video) => {
+
+    const lockVideo = (video) => {
       if (!video) return;
+
+      /* Prevent any context-menu / right-click popup */
+      video.addEventListener('contextmenu', (e) => e.preventDefault(), true);
+
+      /* Disable Picture-in-Picture via JS API (belt-and-suspenders with the HTML attribute) */
+      if ('disablePictureInPicture' in video) {
+        video.disablePictureInPicture = true;
+      }
+
+      /* Prevent entering PiP programmatically */
+      video.addEventListener('enterpictureinpicture', (e) => {
+        e.preventDefault();
+        document.exitPictureInPicture?.().catch(() => {});
+      });
+
+      /* Autoplay resilience */
       video.preload = 'auto';
 
       const tryPlay = () => {
         if (video.paused) video.play().catch(() => {});
       };
 
-      video.addEventListener('pause', () => {
-        if (video.loop) window.setTimeout(tryPlay, 250);
-      });
-
-      video.addEventListener('ended', tryPlay);
-      video.addEventListener('error', () => {
-        video.load();
-        window.setTimeout(tryPlay, 300);
-      });
+      video.addEventListener('pause',        () => { if (video.loop) window.setTimeout(tryPlay, 250); });
+      video.addEventListener('ended',        tryPlay);
+      video.addEventListener('error',        () => { video.load(); window.setTimeout(tryPlay, 300); });
+      video.addEventListener('canplaythrough', tryPlay);
 
       document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === 'visible') tryPlay();
       });
 
-      video.addEventListener('canplaythrough', tryPlay);
       tryPlay();
     };
-    videoElements.forEach(restoreVideoPlayback);
+
+    videoElements.forEach(lockVideo);
 
     /* ── Portfolio auto-scroll with seamless loop ── */
     (() => {
@@ -512,13 +548,24 @@ import portfolioItems from '../data/portfolio-items';
 
       const updateLoopWidth = () => { loopWidth = track.scrollWidth / 2; };
 
-      scroller.addEventListener('wheel', (e) => {
-        if (Math.abs(e.deltaY) > 0) { e.preventDefault(); scroller.scrollLeft += e.deltaY * 0.9; }
-      }, { passive: false });
-
-      // Touch support for dragging the scroller
       let touchStartX = 0;
       let scrollStartLeft = 0;
+      let wheelTimeout = 0;
+      const scrollSpeed = 45; // slower, smoother auto-scroll
+      const resumeAutoScroll = () => {
+        window.clearTimeout(wheelTimeout);
+        wheelTimeout = window.setTimeout(() => { paused = false; }, 600);
+      };
+
+      scroller.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaY) > 0) {
+          e.preventDefault();
+          paused = true;
+          scroller.scrollLeft += e.deltaY * 0.9;
+          resumeAutoScroll();
+        }
+      }, { passive: false });
+
       scroller.addEventListener('touchstart', (e) => {
         touchStartX      = e.touches[0].clientX;
         scrollStartLeft  = scroller.scrollLeft;
@@ -528,17 +575,18 @@ import portfolioItems from '../data/portfolio-items';
         const dx = touchStartX - e.touches[0].clientX;
         scroller.scrollLeft = scrollStartLeft + dx;
       }, { passive: true });
-      scroller.addEventListener('touchend', () => {
-        window.setTimeout(() => { paused = false; }, 800);
-      });
+      scroller.addEventListener('touchend', resumeAutoScroll);
 
-      scroller.addEventListener('mouseenter', () => { paused = true;  });
-      scroller.addEventListener('mouseleave', () => { paused = false; });
+      scroller.addEventListener('pointerdown', () => { paused = true; });
+      scroller.addEventListener('pointerup', resumeAutoScroll);
 
       const step = (time) => {
         if (!paused) {
-          scroller.scrollLeft += (80 * (time - lastTime)) / 1000;
-          if (scroller.scrollLeft >= loopWidth) scroller.scrollLeft -= loopWidth;
+          const delta = time - lastTime;
+          scroller.scrollLeft += (scrollSpeed * delta) / 1000;
+          if (scroller.scrollLeft >= loopWidth) {
+            scroller.scrollLeft -= loopWidth;
+          }
         }
         lastTime = time;
         requestAnimationFrame(step);
@@ -594,10 +642,7 @@ import portfolioItems from '../data/portfolio-items';
   }
 
   /* =====================================================
-     FIX 2: MOBILE DRAWER
-     — Use visibility + opacity instead of display toggling
-       so the CSS transition works and the drawer is always
-       in the DOM flow but invisible/inert when closed.
+     MOBILE DRAWER
   ===================================================== */
   .mobile-nav-drawer {
     position: fixed;
@@ -610,7 +655,6 @@ import portfolioItems from '../data/portfolio-items';
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    /* Closed state: invisible and non-interactive */
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -773,9 +817,6 @@ import portfolioItems from '../data/portfolio-items';
     padding: 0.3rem;
   }
 
-  /* FIX 1: Lang button — gold pill on active, transparent on inactive.
-     Works in both the nav (.lang-switcher) and drawer (.mobile-drawer-lang)
-     since both share the same .lang-btn / .lang-btn-active classes. */
   .lang-btn {
     padding: 0.45rem 0.75rem;
     background: transparent;
@@ -793,7 +834,6 @@ import portfolioItems from '../data/portfolio-items';
 
   .lang-btn:hover { color: rgba(248,250,252,0.9); }
 
-  /* Active pill: gold background + dark text — clearly selected */
   .lang-btn-active {
     background: var(--gold);
     color: var(--ink) !important;
@@ -819,28 +859,34 @@ import portfolioItems from '../data/portfolio-items';
     transform: translateY(-1px);
   }
 
+  /* ① NAV WHATSAPP: square icon-only button — WhatsApp green */
   .nav-whatsapp {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.4rem;
-    height: 2.4rem;
-    border-radius: 0.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
     background: #25D366;
-    color: var(--ink);
+    color: #000000;
     text-decoration: none;
+    flex-shrink: 0;
     transition: background 0.2s ease, transform 0.2s ease;
-    overflow: hidden;
-  }
-
-  .nav-whatsapp svg {
-    width: 1.1rem;
-    height: 1.1rem;
   }
 
   .nav-whatsapp:hover {
     background: #1ebe55;
     transform: translateY(-1px);
+  }
+
+  .nav-whatsapp i,
+  .contact-whatsapp i {
+    font-size: 1.35rem;
+    width: 1.45rem;
+    height: 1.45rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   /* Hamburger */
@@ -874,7 +920,7 @@ import portfolioItems from '../data/portfolio-items';
   .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
   /* =====================================================
-     FIX 3: HERO — perfect centering on all screen sizes
+     HERO
   ===================================================== */
   .hero {
     position: relative;
@@ -919,7 +965,6 @@ import portfolioItems from '../data/portfolio-items';
     z-index: 2;
     max-width: 880px;
     width: 100%;
-    /* Ensure the copy block itself is centred within the hero flex container */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -982,8 +1027,6 @@ import portfolioItems from '../data/portfolio-items';
     text-shadow: 0 1px 12px rgba(6,9,26,0.7), 0 4px 24px rgba(6,9,26,0.5);
   }
 
-  /* FIX 3: hero-actions — flex-wrap with centred alignment,
-     full-width container so buttons can't escape sideways */
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
@@ -1036,7 +1079,7 @@ import portfolioItems from '../data/portfolio-items';
     width: 100%;
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
-    align-items: center;
+    align-items: stretch;
     gap: 4rem;
     padding: 6rem;
     background: #ffffff;
@@ -1044,7 +1087,12 @@ import portfolioItems from '../data/portfolio-items';
     box-sizing: border-box;
   }
 
-  .white-hero-copy { max-width: 460px; }
+  .white-hero-copy {
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
   .white-hero-copy .tag.light {
     margin-bottom: 1.2rem;
@@ -1073,15 +1121,20 @@ import portfolioItems from '../data/portfolio-items';
 
   .white-hero-media {
     position: relative;
-    min-height: 440px;
     border-radius: 1.5rem;
     overflow: hidden;
     box-shadow: 0 40px 80px rgba(6,9,26,0.10);
+    /* stretch to fill the grid cell height; video fills it with object-fit:cover */
+    align-self: stretch;
+    min-height: 440px;
+    display: flex;
+    flex-direction: column;
   }
 
   .white-video {
     width: 100%;
-    height: 100%;
+    flex: 1;
+    min-height: 0;
     object-fit: cover;
     display: block;
     pointer-events: none;
@@ -1427,6 +1480,10 @@ import portfolioItems from '../data/portfolio-items';
   }
 
   .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     background: var(--gold) !important;
     color: var(--ink) !important;
     border: none;
@@ -1444,10 +1501,20 @@ import portfolioItems from '../data/portfolio-items';
     box-shadow: 0 16px 40px rgba(232,160,32,0.25) !important;
   }
 
-  .contact-whatsapp { background: #25D366 !important; }
+  /* ② CONTACT WHATSAPP: WhatsApp green background with black text/icon */
+  .contact-whatsapp {
+    background: #25D366 !important;
+    color: #000000 !important;
+  }
   .contact-whatsapp:hover {
-    background: #20ba5a !important;
-    box-shadow: 0 16px 40px rgba(37,211,102,0.25) !important;
+    background: #1ebe55 !important;
+    box-shadow: 0 16px 40px rgba(6,9,26,0.25) !important;
+  }
+
+  .contact-whatsapp i,
+  .contact-whatsapp span {
+    vertical-align: middle;
+    line-height: 1;
   }
 
   .contact-social {
@@ -1561,7 +1628,6 @@ import portfolioItems from '../data/portfolio-items';
 
     .hero-lead { font-size: 0.95rem; margin-top: 1.5rem; }
 
-    /* FIX 3: stack buttons vertically on mobile, full-width, centred */
     .hero-actions {
       margin-top: 2rem;
       flex-direction: column;
