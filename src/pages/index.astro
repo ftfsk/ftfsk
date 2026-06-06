@@ -1,9 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import logoSrc from '../assets/logo.png';
-import video1 from '../assets/hero_opt.mp4';
-import video2 from '../assets/horizontal_2_opt.mp4';
-import djiImg from '../assets/dji.jpg';
+import siteCopy from '../data/site-copy';
+import siteMedia from '../data/site-media';
 import portfolioItems from '../data/portfolio-items';
 ---
 
@@ -27,7 +25,7 @@ import portfolioItems from '../data/portfolio-items';
     <nav class="top-nav" id="top-nav" aria-label="Primary navigation">
       <div class="nav-left">
         <a class="logo-link" href="#home">
-          <img class="logo" src={logoSrc.src} alt="Fly Through Films logo" />
+          <img class="logo" src={siteMedia.logoSrc.src} alt="Fly Through Films logo" />
         </a>
 
         <div class="nav-links">
@@ -79,23 +77,23 @@ import portfolioItems from '../data/portfolio-items';
         - No <controls> attribute   → prevents the native control bar entirely
       -->
       <video
-        id="hero-video"
-        class="hero-video"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="auto"
-        poster="/background.svg"
-        disablePictureInPicture
-        controlsList="nodownload nofullscreen noremoteplayback"
-        oncontextmenu="return false;"
-      >
-        <source src={video1} type="video/mp4" />
-      </video>
+  id="hero-video"
+  class="hero-video"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="metadata"
+  poster={siteMedia.heroPoster}
+  disablePictureInPicture
+  controlsList="nodownload nofullscreen noremoteplayback"
+  oncontextmenu="return false;"
+>
+  <source src={siteMedia.heroVideo} type="video/mp4" />
+</video>
       <div class="hero-overlay"></div>
       <div class="hero-copy">
-        <span class="tag">Fly Through Films</span>
+        <span class="tag" data-i18n="heroTag">Fly Through Films</span>
         <h1>
           <span class="keyword" aria-live="polite">Εξατομικευμένες Υπηρεσίες</span>
         </h1>
@@ -128,12 +126,12 @@ import portfolioItems from '../data/portfolio-items';
           loop
           playsinline
           preload="auto"
-          poster="/background.svg"
+          poster={siteMedia.heroPoster}
           disablePictureInPicture
           controlsList="nodownload nofullscreen noremoteplayback"
           oncontextmenu="return false;"
         >
-          <source src={video2} type="video/mp4" />
+          <source src={siteMedia.whiteVideo} type="video/mp4" />
         </video>
       </div>
     </section>
@@ -235,7 +233,7 @@ import portfolioItems from '../data/portfolio-items';
               <li><span class="list-dot"></span><span data-i18n="about-list3">Από αισθητικά video μέχρι heavy - duty εργασίες</span></li>
             </ul>
           </div>
-          <div class="about-visual" style={`background-image: url('${djiImg?.src ?? djiImg}')`}></div>
+          <div class="about-visual" style={`background-image: url('${siteMedia.djiImg?.src ?? siteMedia.djiImg}')`}></div>
         </div>
       </section>
 
@@ -253,16 +251,16 @@ import portfolioItems from '../data/portfolio-items';
               flythroughfilms@gmail.com
             </a>
             <!-- ② CONTACT WHATSAPP: proper WhatsApp logo icon -->
-            <a href="https://wa.me/306987945665" target="_blank" rel="noopener noreferrer" class="button contact-btn contact-whatsapp">
+            <a href={siteMedia.whatsappUrl} target="_blank" rel="noopener noreferrer" class="button contact-btn contact-whatsapp">
               <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
               <span data-i18n="whatsapp">WhatsApp</span>
             </a>
             <div class="contact-social">
-              <a href="https://www.instagram.com/flythrough.films" target="_blank" rel="noopener noreferrer" class="social-link">
+              <a href={siteMedia.instagramUrl} target="_blank" rel="noopener noreferrer" class="social-link">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><path d="M16 11.37a4 4 0 1 1-7.99.63A4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
                 <span data-i18n="instagram">Instagram</span>
               </a>
-              <a href="https://www.youtube.com/@FlyThroughFilms" target="_blank" rel="noopener noreferrer" class="social-link">
+              <a href={siteMedia.youtubeUrl} target="_blank" rel="noopener noreferrer" class="social-link">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29.44 29.44 0 0 0 1 12a29.44 29.44 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29.44 29.44 0 0 0 23 12a29.44 29.44 0 0 0-.46-5.58z"/><path d="M10 15l5-3-5-3v6z"/></svg>
                 <span data-i18n="youtube">YouTube</span>
               </a>
@@ -278,325 +276,229 @@ import portfolioItems from '../data/portfolio-items';
       <p data-i18n="footer">Fly Through Films © 2026 — Cinematic Aerial Media</p>
     </footer>
   </main>
+<script
+  define:vars={{
+    translations: siteCopy.translations,
+    defaultLanguage: siteCopy.defaultLanguage
+  }}
+>
+  // ── Language System ──
+  let currentLang = localStorage.getItem('lang') || defaultLanguage || 'el';
+  const keywordEl = document.querySelector('.hero-copy .keyword');
+  let keywordIndex = 0;
 
-  <script>
-    /* ── Language configuration ── */
-    const translations = {
-      el: {
-        portfolio: 'Πόρτφολιο',
-        services: 'Υπηρεσίες',
-        about: 'Σχετικά',
-        contact: 'Επικοινωνία',
-        heroTag: 'Fly Through Films',
-        heroKeywords: ['Εξατομικευμένες Υπηρεσίες', 'Τέχνη και Επιχείρηση', 'Αύξηση Πωλήσεων', 'Δημιουργία Αναμνήσεων', 'Κάλυψη Εκδηλώσεων', 'Προώθηση Προϊόντων'],
-        heroLead: 'Μοναδικό cinematic περιεχόμενο για σκάφη, real estate και events — σχεδιασμένο για premium brands.',
-        viewPortfolio: 'Προβολή Portfolio',
-        whiteTag: 'Δεν φωτογραφίζουμε απλώς...',
-        whiteH2: 'Αποτυπώνουμε τις εικόνες που οι πελάτες μας οραματίζονται.',
-        whiteP: 'Από βίντεο με drones μέχρι branded περιεχόμενο, δημιουργούμε υλικό που αποθεώνει premium προϊόντα και κάνει το όραμά σας αδύνατον να προσπεραστεί.',
-        portfolioLabel: 'Πόρτφολιο',
-        portfolioH2: 'Υλικό για σύγχρονες επιχειρήσεις',
-        servicesLabel: 'Υπηρεσίες',
-        servicesH2: 'Τι σας προσφέρουμε',
-        aerialVideo: 'Aerial Videography',
-        aerialVideoDesc: 'Σταθερές cinematic λήψεις για promos, commercials και digital campaigns.',
-        dronePhoto: 'Drone Photography',
-        dronePhotoDesc: 'Εναέριες φωτογραφίες υψηλής ανάλυσης για print, web και social media.',
-        brandFilms: 'Brand Films',
-        brandFilmsDesc: 'Cinematic films με αφηγηματικό χαρακτήρα για premium brand identity.',
-        eventCoverage: 'Event Coverage',
-        eventCoverageDesc: 'Ολοκληρωμένη κάλυψη με video και φωτογραφία για κάθε live experience.',
-        aboutLabel: 'Σχετικά',
-        aboutH2: 'Drone crew φτιαγμένο για visual storytelling',
-        aboutP: 'Συνδυάζουμε επαγγελματικές πτητικές πρακτικές με δημιουργική κατεύθυνση για να παραδώσουμε υψηλής ποιότητας εναέριο περιεχόμενο. Από το concept μέχρι το τελικό edit, η δουλειά μας είναι προσαρμοσμένη για brands που θέλουν να ξεχωρίζουν.',
-        aboutList1: 'Επαγγελματίες με Πιστοποίηση EASA',
-        aboutList2: 'Υψηλής Ποιότητας Εξοπλισμός',
-        aboutList3: 'Από αισθητικά video μέχρι heavy - duty εργασίες',
-        contactLabel: 'Επικοινωνία',
-        contactH2: 'Σου άρεσε η δουλειά και η φιλοσοφία μας;',
-        contactP: 'Μην διστάσεις να επικοινωνήσεις με email ή να μας βρεις στις παρακάτω πλατφόρμες.',
-        whatsapp: 'WhatsApp',
-        instagram: 'Instagram',
-        youtube: 'YouTube',
-        footer: 'Fly Through Films © 2026 — Cinematic Aerial Media'
-      },
-      en: {
-        portfolio: 'Portfolio',
-        services: 'Services',
-        about: 'About',
-        contact: 'Contact',
-        heroTag: 'Fly Through Films',
-        heroKeywords: ['Customized Services', 'Art & Business', 'Increase Sales', 'Create Memories', 'Event Coverage', 'Promote Products'],
-        heroLead: 'Unique cinematic content for yachts, real estate and events — designed for premium brands.',
-        viewPortfolio: 'View Portfolio',
-        whiteTag: 'We don\'t just photograph...',
-        whiteH2: 'We capture the images your clients dream about.',
-        whiteP: 'From drone videos to branded content, we create material that glorifies premium products and makes your vision impossible to ignore.',
-        portfolioLabel: 'Portfolio',
-        portfolioH2: 'Content for modern businesses',
-        servicesLabel: 'Services',
-        servicesH2: 'What we offer',
-        aerialVideo: 'Aerial Videography',
-        aerialVideoDesc: 'Smooth cinematic shots for promos, commercials and digital campaigns.',
-        dronePhoto: 'Drone Photography',
-        dronePhotoDesc: 'High-resolution aerial photography for print, web and social media.',
-        brandFilms: 'Brand Films',
-        brandFilmsDesc: 'Cinematic films with narrative character for premium brand identity.',
-        eventCoverage: 'Event Coverage',
-        eventCoverageDesc: 'Complete coverage with video and photography for every live experience.',
-        aboutLabel: 'About',
-        aboutH2: 'Drone crew built for visual storytelling',
-        aboutP: 'We combine professional flight practices with creative direction to deliver high-quality aerial content. From concept to final edit, our work is tailored for brands that want to stand out.',
-        aboutList1: 'Certified professional drone pilots',
-        aboutList2: 'High-quality equipment',
-        aboutList3: 'From aesthetic videos to heavy-duty work',
-        contactLabel: 'Contact',
-        contactH2: 'Did you like our work and philosophy?',
-        contactP: 'Feel free to contact us by email or find us on the platforms below.',
-        whatsapp: 'WhatsApp',
-        instagram: 'Instagram',
-        youtube: 'YouTube',
-        footer: 'Fly Through Films © 2026 — Cinematic Aerial Media'
-      }
-    };
+  const setLanguage = (lang) => {
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+    updatePageText();
+    updateLangButtons();
+  };
 
-    let currentLang = localStorage.getItem('lang') || 'el';
-    const keywordEl = document.querySelector('.hero-copy .keyword');
-    let keywordIndex = 0;
-
-    const setLanguage = (lang) => {
-      currentLang = lang;
-      localStorage.setItem('lang', lang);
-      updatePageText();
-      updateLangButtons();
-    };
-
-    const updateLangButtons = () => {
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        const isActive = btn.dataset.lang === currentLang;
-        btn.classList.toggle('lang-btn-active', isActive);
-        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-      });
-    };
-
-    const updatePageText = () => {
-      const t = translations[currentLang];
-      const map = {
-        '[data-i18n="portfolio-nav"]': t.portfolio,
-        '[data-i18n="services-nav"]':  t.services,
-        '[data-i18n="about-nav"]':     t.about,
-        '[data-i18n="contact-nav"]':   t.contact,
-        '[data-i18n="view-portfolio"]': t.viewPortfolio,
-        '[data-i18n="white-tag"]':     t.whiteTag,
-        '[data-i18n="white-h2"]':      t.whiteH2,
-        '[data-i18n="white-p"]':       t.whiteP,
-        '[data-i18n="portfolio-label"]': t.portfolioLabel,
-        '[data-i18n="portfolio-h2"]':  t.portfolioH2,
-        '[data-i18n="services-label"]': t.servicesLabel,
-        '[data-i18n="services-h2"]':   t.servicesH2,
-        '[data-i18n="aerial-video"]':  t.aerialVideo,
-        '[data-i18n="aerial-desc"]':   t.aerialVideoDesc,
-        '[data-i18n="drone-photo"]':   t.dronePhoto,
-        '[data-i18n="drone-desc"]':    t.dronePhotoDesc,
-        '[data-i18n="brand-films"]':   t.brandFilms,
-        '[data-i18n="brand-desc"]':    t.brandFilmsDesc,
-        '[data-i18n="event-coverage"]': t.eventCoverage,
-        '[data-i18n="event-desc"]':    t.eventCoverageDesc,
-        '[data-i18n="about-label"]':   t.aboutLabel,
-        '[data-i18n="about-h2"]':      t.aboutH2,
-        '[data-i18n="about-p"]':       t.aboutP,
-        '[data-i18n="about-list1"]':   t.aboutList1,
-        '[data-i18n="about-list2"]':   t.aboutList2,
-        '[data-i18n="about-list3"]':   t.aboutList3,
-        '[data-i18n="contact-label"]': t.contactLabel,
-        '[data-i18n="contact-h2"]':    t.contactH2,
-        '[data-i18n="contact-p"]':     t.contactP,
-        '[data-i18n="footer"]':        t.footer,
-      };
-      for (const [sel, val] of Object.entries(map)) {
-        document.querySelectorAll(sel).forEach(el => el.textContent = val);
-      }
-      document.querySelectorAll('.portfolio-title').forEach(el => {
-        const elNode = el;
-        const val = currentLang === 'en' ? (elNode.dataset.titleEn || elNode.getAttribute('data-title-en')) : (elNode.dataset.titleEl || elNode.getAttribute('data-title-el'));
-        if (val) elNode.textContent = val;
-      });
-      document.querySelectorAll('.portfolio-desc').forEach(el => {
-        const elNode = el;
-        const val = currentLang === 'en' ? (elNode.dataset.descEn || elNode.getAttribute('data-desc-en')) : (elNode.dataset.descEl || elNode.getAttribute('data-desc-el'));
-        if (val) elNode.textContent = val;
-      });
-      if (keywordEl) {
-        const kws = translations[currentLang]?.heroKeywords;
-        if (kws && kws.length) keywordEl.textContent = kws[0];
-      }
-    };
-
+  const updateLangButtons = () => {
     document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+      const isActive = btn.dataset.lang === currentLang;
+      btn.classList.toggle('lang-btn-active', isActive);
+      btn.setAttribute('aria-pressed', isActive);
+    });
+  };
+
+  const updatePageText = () => {
+    const t = translations[currentLang] || translations['el'];
+    if (!t) return;
+
+    const map = {
+      '[data-i18n="portfolio-nav"]': t.portfolio,
+      '[data-i18n="services-nav"]':  t.services,
+      '[data-i18n="about-nav"]':     t.about,
+      '[data-i18n="contact-nav"]':   t.contact,
+      '[data-i18n="view-portfolio"]': t.viewPortfolio,
+      '[data-i18n="white-tag"]':     t.whiteTag,
+      '[data-i18n="white-h2"]':      t.whiteH2,
+      '[data-i18n="white-p"]':       t.whiteP,
+      '[data-i18n="portfolio-label"]': t.portfolioLabel,
+      '[data-i18n="portfolio-h2"]':  t.portfolioH2,
+      '[data-i18n="services-label"]': t.servicesLabel,
+      '[data-i18n="services-h2"]':   t.servicesH2,
+      '[data-i18n="aerial-video"]':  t.aerialVideo,
+      '[data-i18n="aerial-desc"]':   t.aerialVideoDesc,
+      '[data-i18n="drone-photo"]':   t.dronePhoto,
+      '[data-i18n="drone-desc"]':    t.dronePhotoDesc,
+      '[data-i18n="brand-films"]':   t.brandFilms,
+      '[data-i18n="brand-desc"]':    t.brandFilmsDesc,
+      '[data-i18n="event-coverage"]': t.eventCoverage,
+      '[data-i18n="event-desc"]':    t.eventCoverageDesc,
+      '[data-i18n="about-label"]':   t.aboutLabel,
+      '[data-i18n="about-h2"]':      t.aboutH2,
+      '[data-i18n="about-p"]':       t.aboutP,
+      '[data-i18n="about-list1"]':   t.aboutList1,
+      '[data-i18n="about-list2"]':   t.aboutList2,
+      '[data-i18n="about-list3"]':   t.aboutList3,
+      '[data-i18n="contact-label"]': t.contactLabel,
+      '[data-i18n="contact-h2"]':    t.contactH2,
+      '[data-i18n="contact-p"]':     t.contactP,
+      '[data-i18n="footer"]':        t.footer,
+    };
+
+    Object.entries(map).forEach(([sel, val]) => {
+      if (val) document.querySelectorAll(sel).forEach(el => el.textContent = val);
     });
 
-    updateLangButtons();
-    updatePageText();
+    // Portfolio bilingual
+    document.querySelectorAll('.portfolio-title').forEach(el => {
+      const val = currentLang === 'en' 
+        ? (el.dataset.titleEn || el.textContent)
+        : (el.dataset.titleEl || el.textContent);
+      el.textContent = val;
+    });
 
-    /* ── Keyword cycling ── */
-    const getKeywords = () => translations[currentLang].heroKeywords;
+    document.querySelectorAll('.portfolio-desc').forEach(el => {
+      const val = currentLang === 'en' 
+        ? (el.dataset.descEn || el.textContent)
+        : (el.dataset.descEl || el.textContent);
+      el.textContent = val;
+    });
 
-    const updateKeyword = () => {
-      if (!keywordEl) return;
-      keywordEl.classList.add('fade-out');
-      window.setTimeout(() => {
-        const kws = getKeywords();
-        keywordIndex = (keywordIndex + 1) % kws.length;
-        keywordEl.textContent = kws[keywordIndex];
-        keywordEl.classList.remove('fade-out');
-      }, 400);
-    };
-    if (keywordEl) window.setInterval(updateKeyword, 3000);
-
-    /* ── Nav visibility: show only while hero is in view ── */
-    const heroEl = document.querySelector('.hero');
-    const navEl  = document.querySelector('#top-nav');
-
-    if (heroEl && navEl && 'IntersectionObserver' in window) {
-      new IntersectionObserver((entries) => {
-        entries.forEach(e => navEl.classList.toggle('nav-hidden', !e.isIntersecting));
-      }, { threshold: 0.05 }).observe(heroEl);
+    if (keywordEl && t.heroKeywords?.length) {
+      keywordEl.textContent = t.heroKeywords[0];
     }
+  };
 
-    /* ── Hamburger / mobile drawer ── */
-    const hamburger = document.getElementById('hamburger');
-    const drawer    = document.getElementById('mobile-drawer');
+  // Initialize language
+  document.querySelectorAll('.lang-btn').forEach(btn => 
+    btn.addEventListener('click', () => setLanguage(btn.dataset.lang))
+  );
+  updateLangButtons();
+  updatePageText();
 
-    const closeDrawer = () => {
-      hamburger?.classList.remove('open');
-      hamburger?.setAttribute('aria-expanded', 'false');
-      drawer?.classList.remove('open');
-      drawer?.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    };
+  // Keyword cycling
+  const updateKeyword = () => {
+    if (!keywordEl) return;
+    keywordEl.classList.add('fade-out');
+    setTimeout(() => {
+      const kws = (translations[currentLang] || translations['el'])?.heroKeywords || [];
+      keywordIndex = (keywordIndex + 1) % Math.max(kws.length, 1);
+      keywordEl.textContent = kws[keywordIndex] || '';
+      keywordEl.classList.remove('fade-out');
+    }, 400);
+  };
+  if (keywordEl) setInterval(updateKeyword, 3000);
 
-    hamburger?.addEventListener('click', () => {
-      const isOpen = drawer?.classList.contains('open');
+  // ── Nav Hide on Scroll ──
+  const heroEl = document.querySelector('.hero');
+  const navEl  = document.querySelector('#top-nav');
+  if (heroEl && navEl && 'IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      navEl.classList.toggle('nav-hidden', !entries[0].isIntersecting);
+    }, { threshold: 0.05 }).observe(heroEl);
+  }
+
+  // ── Mobile Hamburger + Drawer ──
+  const hamburger = document.getElementById('hamburger');
+  const drawer    = document.getElementById('mobile-drawer');
+
+  const closeDrawer = () => {
+    hamburger?.classList.remove('open');
+    hamburger?.setAttribute('aria-expanded', 'false');
+    drawer?.classList.remove('open');
+    drawer?.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  if (hamburger && drawer) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = drawer.classList.contains('open');
       if (isOpen) {
         closeDrawer();
       } else {
         hamburger.classList.add('open');
         hamburger.setAttribute('aria-expanded', 'true');
-        drawer?.classList.add('open');
-        drawer?.setAttribute('aria-hidden', 'false');
+        drawer.classList.add('open');
+        drawer.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
       }
     });
 
-    drawer?.querySelectorAll('a')?.forEach(a => a.addEventListener('click', closeDrawer));
-    drawer?.querySelector('.drawer-close')?.addEventListener('click', closeDrawer);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+    drawer.querySelectorAll('a, .drawer-close').forEach(el => 
+      el.addEventListener('click', closeDrawer)
+    );
+  }
 
-    /* ── Video resilience + popup prevention ── */
-    const videoElements = Array.from(document.querySelectorAll('video'));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeDrawer();
+  });
 
-    const lockVideo = (video) => {
-      if (!video) return;
+  // ── Video Protection ──
+  document.querySelectorAll('video').forEach(video => {
+    if (!video) return;
+    video.addEventListener('contextmenu', e => e.preventDefault(), true);
+    if ('disablePictureInPicture' in video) video.disablePictureInPicture = true;
 
-      /* Prevent any context-menu / right-click popup */
-      video.addEventListener('contextmenu', (e) => e.preventDefault(), true);
+    const tryPlay = () => video.paused && video.play().catch(() => {});
+    ['pause', 'ended', 'error'].forEach(ev => 
+      video.addEventListener(ev, () => setTimeout(tryPlay, 300))
+    );
+    video.addEventListener('canplaythrough', tryPlay);
+  });
 
-      /* Disable Picture-in-Picture via JS API (belt-and-suspenders with the HTML attribute) */
-      if ('disablePictureInPicture' in video) {
-        video.disablePictureInPicture = true;
-      }
+  // ── Portfolio Infinite Scroller ──
+  (() => {
+    const scroller = document.querySelector('.portfolio-scroller');
+    const track = scroller?.querySelector('.portfolio-track');
+    if (!scroller || !track) return;
 
-      /* Prevent entering PiP programmatically */
-      video.addEventListener('enterpictureinpicture', (e) => {
+    // Clone for seamless loop
+    Array.from(track.children).forEach(item => track.appendChild(item.cloneNode(true)));
+
+    let lastTime = performance.now();
+    let paused = false;
+    let loopWidth = 0;
+    const scrollSpeed = 45;
+
+    const updateLoopWidth = () => loopWidth = track.scrollWidth / 2;
+
+    const resumeAutoScroll = () => setTimeout(() => paused = false, 800);
+
+    scroller.addEventListener('wheel', e => {
+      if (Math.abs(e.deltaY) > 5) {
         e.preventDefault();
-        document.exitPictureInPicture?.().catch(() => {});
-      });
+        paused = true;
+        scroller.scrollLeft += e.deltaY * 0.8;
+        resumeAutoScroll();
+      }
+    }, { passive: false });
 
-      /* Autoplay resilience */
-      video.preload = 'auto';
+    // Touch support
+    let touchStartX = 0, scrollStartLeft = 0;
+    scroller.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+      scrollStartLeft = scroller.scrollLeft;
+      paused = true;
+    }, { passive: true });
 
-      const tryPlay = () => {
-        if (video.paused) video.play().catch(() => {});
-      };
+    scroller.addEventListener('touchmove', e => {
+      const dx = touchStartX - e.touches[0].clientX;
+      scroller.scrollLeft = scrollStartLeft + dx;
+    }, { passive: true });
 
-      video.addEventListener('pause',        () => { if (video.loop) window.setTimeout(tryPlay, 250); });
-      video.addEventListener('ended',        tryPlay);
-      video.addEventListener('error',        () => { video.load(); window.setTimeout(tryPlay, 300); });
-      video.addEventListener('canplaythrough', tryPlay);
+    scroller.addEventListener('touchend', resumeAutoScroll);
+    scroller.addEventListener('pointerdown', () => paused = true);
+    scroller.addEventListener('pointerup', resumeAutoScroll);
 
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') tryPlay();
-      });
-
-      tryPlay();
+    const step = (time) => {
+      if (!paused) {
+        const delta = time - lastTime;
+        scroller.scrollLeft += (scrollSpeed * delta) / 1000;
+        if (scroller.scrollLeft >= loopWidth) scroller.scrollLeft -= loopWidth;
+      }
+      lastTime = time;
+      requestAnimationFrame(step);
     };
 
-    videoElements.forEach(lockVideo);
-
-    /* ── Portfolio auto-scroll with seamless loop ── */
-    (() => {
-      const scroller = document.querySelector('.portfolio-scroller');
-      const track    = scroller?.querySelector('.portfolio-track');
-      if (!scroller || !track) return;
-
-      Array.from(track.children).forEach(item => track.appendChild(item.cloneNode(true)));
-
-      let lastTime  = performance.now();
-      let paused    = false;
-      let loopWidth = 0;
-
-      const updateLoopWidth = () => { loopWidth = track.scrollWidth / 2; };
-
-      let touchStartX = 0;
-      let scrollStartLeft = 0;
-      let wheelTimeout = 0;
-      const scrollSpeed = 45; // slower, smoother auto-scroll
-      const resumeAutoScroll = () => {
-        window.clearTimeout(wheelTimeout);
-        wheelTimeout = window.setTimeout(() => { paused = false; }, 600);
-      };
-
-      scroller.addEventListener('wheel', (e) => {
-        if (Math.abs(e.deltaY) > 0) {
-          e.preventDefault();
-          paused = true;
-          scroller.scrollLeft += e.deltaY * 0.9;
-          resumeAutoScroll();
-        }
-      }, { passive: false });
-
-      scroller.addEventListener('touchstart', (e) => {
-        touchStartX      = e.touches[0].clientX;
-        scrollStartLeft  = scroller.scrollLeft;
-        paused = true;
-      }, { passive: true });
-      scroller.addEventListener('touchmove', (e) => {
-        const dx = touchStartX - e.touches[0].clientX;
-        scroller.scrollLeft = scrollStartLeft + dx;
-      }, { passive: true });
-      scroller.addEventListener('touchend', resumeAutoScroll);
-
-      scroller.addEventListener('pointerdown', () => { paused = true; });
-      scroller.addEventListener('pointerup', resumeAutoScroll);
-
-      const step = (time) => {
-        if (!paused) {
-          const delta = time - lastTime;
-          scroller.scrollLeft += (scrollSpeed * delta) / 1000;
-          if (scroller.scrollLeft >= loopWidth) {
-            scroller.scrollLeft -= loopWidth;
-          }
-        }
-        lastTime = time;
-        requestAnimationFrame(step);
-      };
-
-      window.addEventListener('resize', updateLoopWidth);
-      updateLoopWidth();
-      requestAnimationFrame(step);
-    })();
-  </script>
+    window.addEventListener('resize', updateLoopWidth);
+    updateLoopWidth();
+    requestAnimationFrame(step);
+  })();
+</script>
 </Layout>
 
 <style>

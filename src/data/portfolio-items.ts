@@ -1,3 +1,6 @@
+// Edit portfolio cards here.
+// Change title, title_en, description, description_en and imageUrl.
+// If you want to use local images, put them in src/assets and update imageUrl.
 const portfolioItems = [
   {
     title: 'Real Estate',
